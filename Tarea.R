@@ -114,6 +114,47 @@ acf(MA2e , main=(expression(MA2e~~~~theta==c(-0.1,0.1))))
 pacf(MA2e ,main=(expression(MA2e~~~~theta==c(-0.1,0.1))))
 
 
+#### Modelos o procesos ARMA ####
+set.seed(126)
+ARIMAA <- list(order = c(2,0,2),
+               ar = c(-0.1,-0.2),
+               ma = c(0.3,0.2))
+
+mu = 5
+# Simulamos el proceso arma + mu (media)
+ARIMAA.sim <- arima.sim(n = 100, model = ARIMAA) + mu 
+
+class(ARIMAA.sim)
+plot.ts(ARIMAA.sim)
+acf(ARIMAA.sim) 
+pacf(ARIMAA.sim) 
+
+# ARMA(2,2) = AR(2) + MA(2)
+# Estimar esos parametros
+arima(x = ARIMAA.sim, order=c(2,0,2))
+
+
+set.seed(126)
+ARIMAA2 <- list(order = c(2,0,2),
+               ar = c(0.3,0.4),
+               ma = c(-0.1,-0.3))
+
+mu = 4
+# Simulamos el proceso arma + mu (media)
+ARIMAA2.sim <- arima.sim(n = 100, model = ARIMAA) + mu 
+
+class(ARIMAA2.sim)
+plot.ts(ARIMAA2.sim)
+acf(ARIMAA2.sim) 
+pacf(ARIMAA2.sim) 
+
+# ARMA(2,2) = AR(2) + MA(2)
+# Estimar esos parametros
+arima(x = ARIMAA2.sim, order=c(2,0,2))
+
+
+
+
 
 
 
